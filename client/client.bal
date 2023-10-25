@@ -133,5 +133,39 @@ public class GraphQLClient {
     self.mockDepartments = [self.mockDepartment];
     }
 
+     // Queries
+
+    public function getUser(string id) returns json|error {
+        string query = string `{
+            "query": "{ user(id: \"${id}\") { id, firstName, lastName, jobTitle, position, role, department { id, name }, kpis { id, name } } }"
+        }`;
+        return self.graphqlQuery(query);
+    }
+
+    public function getAllUsers() returns json|error {
+        string query = "{\"query\": \"{ users { id, firstName, lastName, role } }\"}";
+        return self.graphqlQuery(query);
+    }
+
+    public function getDepartment(string id) returns json|error {
+        string query = "{\"query\": \"{ department(id: \"" + id + "\") { id, name, hod { id, firstName, lastName }, objectives { id, name }, users { id, firstName, lastName } } }\"}";
+        return self.graphqlQuery(query);
+    }
+
+    public function getAllDepartments() returns json|error {
+        string query = "{\"query\": \"{ departments { id, name } }\"}";
+        return self.graphqlQuery(query);
+    }
+
+    public function getDepartmentObjective(string id) returns json|error {
+        string query = "{\"query\": \"{ departmentObjective(id: \"" + id + "\") { id, name, weight, department { id, name }, relatedKPIs { id, name } } }\"}";
+        return self.graphqlQuery(query);
+    }
+
+    public function getAllDepartmentObjectives() returns json|error {
+        string query = "{\"query\": \"{ departmentObjectives { id, name, weight } }\"}";
+        return self.graphqlQuery(query);
+    }
+
 
 }
