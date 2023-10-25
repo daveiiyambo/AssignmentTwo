@@ -30,36 +30,7 @@ service /graphql on new graphql:Listener(8080) {
             return error("User not found");
         }
     }
-
-
-    //get all departs is declared below already
-    // resource function get departments() returns Department[]|error|stream<Department, sql:Error?> {
-    //     Department[] departments = [];
-        
-    //     // Fetch departments from database
-    //     sql:ParameterizedQuery queryString = `SELECT * FROM Departments`;
-    //     var result = p1DB->query(queryString, Department);
-
-        
-    //     if result is stream<Department, error> {
-    //         error? e = result.forEach(function(DepartmentRow departmentRow) {
-    //             departments.push({
-    //                 id: departmentRow.id.toString(),
-    //                 name: departmentRow.name,
-    //                 hod: { id: departmentRow.hodId.toString() } // Minimal data for HoD
-    //             });
-    //         });
-
-    //         if e is error {
-    //             return e;
-    //         }
-    //     } else {
-    //         return result;
-    //     }
-
-    //     return departments;
-    // }
-
+    
 
     //fecth department by ID
     resource function get department(int id) returns Department|error {
